@@ -49,6 +49,7 @@ class ProjectsController extends Controller
                         'status'        => $project->status,
                         'pending_tasks' => $project->tasks()->pending()->count(),
                         'days_left'     => $project->days_left,
+                        'jamboard_url'     => $project->jamboard_url,
                         'team_members'  => $project->teamMembers->transform(function ($user) {
                             return [
                                 'name'       => $user->name,
@@ -108,6 +109,7 @@ class ProjectsController extends Controller
                                 'index'        => $task->index,
                                 'due_date'     => optional($task->due_date)->format('Y-m-d'),
                                 'priority'     => $task->priority,
+                                'jamboard_url'     => $task->jamboard_url,
                                 'is_completed' => $task->isCompleted(),
                                 'user'         => [
                                     'uuid'       => optional($task->user)->uuid,

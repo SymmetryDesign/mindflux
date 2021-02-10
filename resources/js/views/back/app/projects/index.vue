@@ -75,20 +75,32 @@
                 <div class="bg-white shadow overflow-hidden rounded-md" v-if="$page.projects.data.length">
                     <ul>
                         <li class="border-b border-gray-100 last:border-0" v-for="project in $page.projects.data">
-                            <inertia-link :href="route('app:projects.show', project.uuid)" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
                                 <div class="px-6 py-4 flex items-center">
                                     <div class="min-w-0 flex-1 md:grid md:grid-cols-8 md:gap-4">
-                                        <div class="md:col-span-4">
+                                        <div class="md:col-span-2">
                                             <div>
-                                                <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
-                                                    {{ project.name }}
-                                                </div>
+                                                <inertia-link :href="route('app:projects.show', project.uuid)" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+
+                                                    <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
+                                                        {{ project.name }}
+                                                    </div>
+                                                </inertia-link>
 
                                                 <div class="mt-2 flex">
                                                     <div class="flex items-center text-sm leading-5 text-gray-500 truncate">
                                                         <span>{{ project.description }}</span>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 md:col-span-2 sm:mt-0" v-if="project.jamboard_url !=null">
+                                            <div class="px-0 sm:px-2">
+                                               
+                                                <a target="_blank" :href="project.jamboard_url" class="btn btn-indigo">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                                                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                                                    </svg>
+                                                </a>
                                             </div>
                                         </div>
 
@@ -140,14 +152,16 @@
                                         </div>
                                     </div>
 
+                                    <inertia-link :href="route('app:projects.show', project.uuid)" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
 
-                                    <div class="ml-5 flex-shrink-0">
-                                        <svg class="h-5 w-5 text-gray-400 fill-current" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                                        </svg>
-                                    </div>
+                                        <div class="ml-5 flex-shrink-0">
+                                            <svg class="h-5 w-5 text-gray-400 fill-current" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                    </inertia-link>
                                 </div>
-                            </inertia-link>
+                           
                         </li>
                     </ul>
 
