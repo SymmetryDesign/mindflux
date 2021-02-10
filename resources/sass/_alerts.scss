@@ -1,0 +1,15 @@
+.alert {
+    @apply .flex .px-4 .py-3 .font-medium .leading-5 .rounded-lg .text-sm .mb-4;
+}
+
+.alert-success {
+    @apply .text-green-800 .bg-green-100;
+}
+
+.alert-failure {
+    @apply .text-red-800 .bg-red-100;
+}
+
+.alert-warning {
+    @apply .text-yellow-800 .bg-yellow-100;
+}

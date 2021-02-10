@@ -1,0 +1,27 @@
+.badge {
+    @apply .inline-flex .items-center .px-2.5 .py-0.5 .rounded-full .text-xs .font-medium .leading-4 .bg-gray-100 .text-gray-800;
+}
+
+.badge-rounded {
+    @apply .rounded;
+}
+
+.badge-lg {
+    @apply .px-3 .py-0.5 .leading-5;
+}
+
+.badge-green {
+    @apply .bg-green-100 .text-green-800;
+}
+
+.badge-yellow {
+    @apply .bg-yellow-100 .text-yellow-800;
+}
+
+.badge-red {
+    @apply .bg-red-100 .text-red-800;
+}
+
+.badge-indigo {
+    @apply .bg-indigo-100 .text-indigo-800;
+}

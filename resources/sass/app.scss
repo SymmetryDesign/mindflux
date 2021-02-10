@@ -1,0 +1,42 @@
+/**
+ * Tailwind Base Styles
+ */
+@tailwind base;
+
+/**
+ * Tailwindcss Components
+ */
+@tailwind components;
+
+/**
+ * Custom Components
+ */
+@import "alerts";
+@import "avatars";
+@import "badges";
+@import "button-group";
+@import "buttons";
+@import "transitions";
+@import "utils";
+@import "dropdown";
+@import "forms";
+
+/**
+ * Tailwindcss Utilities
+ */
+@tailwind utilities;
+
+/**
+ * Vendor
+ */
+@import "~flatpickr/dist/flatpickr.min.css";
+@import "~@fullcalendar/core/main.min.css";
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+/**
+ * Overrides
+ */
+@import "draggable";
+@import "full_calendar";
+@import "nprogress";

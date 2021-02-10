@@ -1,0 +1,23 @@
+.fc-day-grid-event {
+    @apply .px-2 .py-0 .mx-2 .my-1 .cursor-pointer .text-sm .select-none;
+}
+
+.fc-unthemed td.fc-today {
+    @apply .bg-gray-100;
+}
+
+.fc-day-number {
+    @apply .text-xs .font-semibold m-2;
+}
+
+thead > tr > .fc-day-header {
+    @apply .text-xs .uppercase .font-semibold .text-gray-600;
+}
+
+.fc-widget-header {
+    @apply .border-gray-200;
+}
+
+.fc-unthemed td {
+    @apply .border-gray-200;
+}

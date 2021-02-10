@@ -1,0 +1,19 @@
+.btn-group {
+    @apply .relative .z-0 .inline-flex .shadow-sm;
+
+    > .btn {
+        @apply .relative;
+
+        &:focus {
+            @apply .z-10;
+        }
+    }
+
+    > .btn:not(:last-child) {
+        @apply .rounded-r-none;
+    }
+
+    > .btn:not(:first-child) {
+        @apply .rounded-l-none .-ml-px;
+    }
+}

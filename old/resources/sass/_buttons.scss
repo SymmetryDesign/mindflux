@@ -1,0 +1,107 @@
+.btn {
+    @apply .inline-flex .items-center .justify-center .text-center .px-4 .py-2 .border .border-transparent .text-sm .leading-5 .font-medium .rounded-md .transition .ease-in-out .duration-150;
+
+    &:focus {
+        @apply .outline-none .shadow-outline-blue;
+    }
+
+    &:active {
+        @apply .ease-in-out .duration-150;
+    }
+
+    &:disabled {
+        @apply .cursor-not-allowed .opacity-50;
+    }
+}
+
+.btn-block {
+    @apply .w-full .block;
+}
+
+.btn-xs {
+    @apply .px-2.5 .py-1.5 .leading-4;
+}
+
+.btn-sm {
+    @apply .px-3 .py-2 .leading-4;
+}
+
+.btn-md {
+    @apply .px-4 .py-2 .leading-5;
+}
+
+.btn-lg {
+    @apply .px-4 .py-2 .leading-6;
+}
+
+.btn-xl {
+    @apply .px-6 .py-3 .leading-6;
+}
+
+.btn-gray {
+    @apply .text-gray-700 .border-gray-300;
+}
+
+.btn-indigo {
+    @apply .text-white .bg-indigo-600;
+
+    &:focus {
+        @apply .border-indigo-700;
+    }
+
+    &:hover {
+        @apply .bg-indigo-500;
+    }
+
+    &:active {
+        @apply .bg-indigo-700;
+    }
+}
+
+.btn-red {
+    @apply .text-white .bg-red-600;
+
+    &:focus {
+        @apply .border-red-700;
+    }
+
+    &:hover {
+        @apply .bg-red-500;
+    }
+
+    &:active {
+        @apply .bg-red-700;
+    }
+}
+
+.btn-white {
+    @apply .text-gray-700 .bg-white .border-gray-300;
+
+    &:focus {
+        @apply .border-blue-300 .outline-none .shadow-outline-blue;
+    }
+
+    &:hover {
+        @apply .text-gray-500;
+    }
+
+    &:active {
+        @apply .text-gray-700;
+    }
+}
+
+.btn-flat {
+    @apply .text-gray-700 .bg-transparent;
+
+    &:focus {
+        @apply .outline-none .shadow-none;
+    }
+
+    &:hover {
+        @apply .text-gray-500;
+    }
+
+    &:active {
+        @apply .text-gray-700;
+    }
+}

@@ -1,0 +1,3 @@
+[09-Feb-2021 08:45:02 UTC] PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes) in phar:///opt/cpanel/composer/bin/composer/src/Composer/DependencyResolver/Solver.php on line 223
+[09-Feb-2021 08:47:02 UTC] PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes) in phar:///opt/cpanel/composer/bin/composer/src/Composer/DependencyResolver/Solver.php on line 223
+[09-Feb-2021 09:05:25 UTC] PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes) in phar:///opt/cpanel/composer/bin/composer/src/Composer/DependencyResolver/Solver.php on line 223

@@ -1,0 +1,35 @@
+.avatar {
+    @apply .inline-block .h-10 .w-10 .rounded-full;
+}
+
+.avatar-xs {
+    @apply .w-6 .h-6;
+}
+
+.avatar-sm {
+    @apply .h-8 .w-8;
+}
+
+.avatar-md {
+    @apply .h-10 .w-10;
+}
+
+.avatar-lg {
+    @apply .h-12 .w-12;
+}
+
+.avatar-xl {
+    @apply .w-14 .h-14;
+}
+
+.avatar-group {
+    @apply .flex .overflow-hidden;
+
+    > .avatar {
+        @apply .inline-block .text-white .shadow-solid;
+
+        &:not(:first-child) {
+            @apply .-ml-1 .shadow-solid;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+*
+!public/
+!.gitignore
+settings.json
+/tasks/*
+!tasks/.gitkeep

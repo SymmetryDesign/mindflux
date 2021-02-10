@@ -1,0 +1,7 @@
+.draggable-ghost {
+    @apply .bg-transparent .border .border-gray-400 .shadow-none .border-dashed .border-2;
+
+    & > * {
+        @apply .opacity-0;
+    }
+}
