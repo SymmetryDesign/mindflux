@@ -126,7 +126,11 @@
                 </v-tab>
             </v-tabs>
         </div>
+        <v-modal ref="modal">
+       
+        </v-modal>
     </v-modal>
+     
 </template>
 
 <script>

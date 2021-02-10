@@ -2,6 +2,14 @@
     <v-app-default-layout>
         <template v-slot:header>
             <h1 class="text-2xl font-semibold text-gray-900">{{ project.name }}</h1>
+            <div class="flex items-center px-3" >
+                    <a target="_blank"  class="btn btn-indigo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        Jamboard URL
+                    </a>
+                </div>
 
             <div class="ml-auto">
                 <v-dropdown>
@@ -27,7 +35,7 @@
                                 
                                 <!-- clint - link to add jamboard url - opens jamboard url text field modal for this task -->
                                 
-                                <a @click.prevent="$emit('modal-jurl')" href="#"
+                                <a @click.prevent="showProjectAddJUModal()" href="#"
                                        class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                     >
                                         Jamboard URL
@@ -169,6 +177,7 @@
     import VEditColumnModal from '@/views/back/app/projects/modal-column-edit'
     import VAddColumnModal from '@/views/back/app/projects/modal-column-add'
     import VEditProjectModal from '@/views/back/app/projects/modal-project-edit'
+    import VProjectAddJUModal from '@/views/back/app/projects/modal-project-add-ju'
     import VDropdown from '@/components/dropdown'
     import VAlert from '@/components/alert'
 
@@ -234,6 +243,9 @@
 
             showEditProjectModal() {
                 this.$modal(VEditProjectModal);
+            },
+            showProjectAddJUModal() {
+                this.$modal(VProjectAddJUModal);
             },
 
             showDeleteProjectModal() {

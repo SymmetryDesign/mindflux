@@ -1,5 +1,5 @@
 <template>
-    <a href="#" @click.prevent="$emit('click', task)" class="flex flex-col bg-white rounded-lg shadow mb-3 select-none focus:outline-none">
+    <a href="#"  class="flex flex-col bg-white rounded-lg shadow mb-3 select-none focus:outline-none">
         <div v-if="task.is_completed" class="flex items-center py-2 px-4 rounded-t-lg bg-green-100 text-green-500 text-xs">
             <svg class="w-3 h-3 mr-1.5" height="100%" viewBox="0 0 20 20" width="100%">
                 <g fill="none" fill-rule="evenodd">
@@ -12,7 +12,9 @@
         </div>
 
         <span class="text-sm p-4">
+            <a href="#" @click.prevent="$emit('click', task)">
             {{ task.content }}
+            </a>
         </span>
 
         <div class="flex items-center text-xs justify-between text-gray-500 px-4 pb-4" v-if="task.due_date || task.sub_tasks.total || task.user.name !== null">
@@ -38,12 +40,35 @@
 
                     {{ task.sub_tasks.completed + '/' + task.sub_tasks.total }}
                 </div>
+                <!-- Waqar Code -->
+                <div class="flex items-center px-3" v-if="task.jamboard_url">
+                    <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!--  -->
             </div>
 
             <div class="ml-auto" v-if="task.user.name !== null">
                 <img class="avatar avatar-xs" :src="task.user.avatar_url" alt="avatar">
             </div>
         </div>
+        <div class="flex items-center text-xs justify-between text-gray-500 px-4 pb-4" v-else>
+            <!-- Waqar Code -->
+                <div class="flex items-center px-3" v-if="task.jamboard_url">
+                    <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!--  -->
+        </div>
+
     </a>
 </template>
 
