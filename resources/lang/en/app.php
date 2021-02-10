@@ -19,7 +19,7 @@ return [
         'organization'                 => 'Organization',
         'profile-settings'             => 'Profile Settings',
         'dashboard'                    => 'Dashboard',
-        'my-dashboard'                    => 'Jamboard-Changed',
+        'my-dashboard'                    => 'Jamboard-Changedd',
         'my-tasks'                     => 'My Tasks',
         'calendar'                     => 'Calendar',
         'projects'                     => 'Projects',
