@@ -103,6 +103,12 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="mt-2 md:col-span-2 sm:mt-0" v-else>
+                                            <div class="px-0 sm:px-2">
+                                               
+                                                
+                                            </div>
+                                        </div>
 
                                         <div class="mt-2 md:col-span-2 sm:mt-0">
                                             <div>
