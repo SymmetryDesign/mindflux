@@ -1,5 +1,5 @@
 <template>
-    <a href="#"  class="flex flex-col bg-white rounded-lg shadow mb-3 select-none focus:outline-none">
+    <div  class="flex flex-col bg-white rounded-lg shadow mb-3 select-none focus:outline-none">
         <div v-if="task.is_completed" class="flex items-center py-2 px-4 rounded-t-lg bg-green-100 text-green-500 text-xs">
             <svg class="w-3 h-3 mr-1.5" height="100%" viewBox="0 0 20 20" width="100%">
                 <g fill="none" fill-rule="evenodd">
@@ -11,11 +11,13 @@
             {{ $trans('labels.completed') }}
         </div>
 
-        <span class="text-sm p-4" @click.prevent="$emit('click', task)">
-            <a href="#" >
-            {{ task.content }}
-            </a>
-        </span>
+        <a href="#" class="text-sm p-4">
+            <span class="" @click.prevent="$emit('click', task)">
+            
+                {{ task.content }}
+                
+            </span>
+        </a>
 
         <div class="flex items-center text-xs justify-between text-gray-500 px-4 pb-4" v-if="task.due_date || task.sub_tasks.total || task.user.name !== null">
             <div class="flex items-center -mx-3">
@@ -76,7 +78,7 @@
                 <!--  -->
         </div>
 
-    </a>
+    </div>
 </template>
 
 <script>
