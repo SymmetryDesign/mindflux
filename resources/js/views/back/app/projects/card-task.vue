@@ -11,8 +11,8 @@
             {{ $trans('labels.completed') }}
         </div>
 
-        <span class="text-sm p-4">
-            <a href="#" @click.prevent="$emit('click', task)">
+        <span class="text-sm p-4" @click.prevent="$emit('click', task)">
+            <a href="#" >
             {{ task.content }}
             </a>
         </span>
