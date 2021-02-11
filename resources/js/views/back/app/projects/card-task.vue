@@ -40,7 +40,13 @@
 
                     {{ task.sub_tasks.completed + '/' + task.sub_tasks.total }}
                 </div>
-                <!-- Waqar Code -->
+              
+            </div>
+
+            <div class="ml-auto" v-if="task.user.name !== null">
+                <img class="avatar avatar-xs" :src="task.user.avatar_url" alt="avatar">
+            </div>
+              <!-- Waqar Code -->
                 <div class="flex items-center px-3" v-if="task.jamboard_url">
                     <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
@@ -49,15 +55,16 @@
                     </a>
                 </div>
 
-                <!--  -->
-            </div>
-
-            <div class="ml-auto" v-if="task.user.name !== null">
-                <img class="avatar avatar-xs" :src="task.user.avatar_url" alt="avatar">
-            </div>
+            <!--  -->
         </div>
         <div class="flex items-center text-xs justify-between text-gray-500 px-4 pb-4" v-else>
             <!-- Waqar Code -->
+                <div class="flex items-center px-3" v-if="task.jamboard_url">
+                    
+                </div>
+                <div class="flex items-center px-3" v-if="task.jamboard_url">
+                    
+                </div>
                 <div class="flex items-center px-3" v-if="task.jamboard_url">
                     <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">

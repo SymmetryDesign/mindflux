@@ -58,29 +58,49 @@ class ProjectTasksController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'content' => ['required', 'max:255'],
-        ]);
-
-        $task = Task::where('uuid', $request->task)->firstOrFail();
-
-        $this->authorize('update', $task);
-
-        $task->update([
-            'content'  => $request->input('content'),
-            'due_date' => $request->input('due_date'),
-            'priority' => $request->input('priority'),
-        ]);
-
-        if ($task->wasChanged('due_date')) {
-            event(new TaskDeadlineChanged($task));
-        }
-
-        $this->updateAssignedTaskUser($task, $request);
-
-        $this->updateTaskStatus($task, $request);
-
-        return back();
+    if($request->input('jamboard_url'))
+    {
+    $this->validate($request, [
+    'jamboard_url'=> ['required', 'string']
+    ]);
+    
+    $task = Task::where('uuid', $request->task)->firstOrFail();
+    
+    $task->jamboard_url = $request->input('jamboard_url');
+    $task->save();
+    
+    session()->flash('message', 'Jamboard Url updated for task');
+    
+    return back();
+    
+    
+    }
+    else
+    {
+    $this->validate($request, [
+    'content' => ['required', 'max:255'],
+    ]);
+    
+    $task = Task::where('uuid', $request->task)->firstOrFail();
+    
+    $this->authorize('update', $task);
+    
+    $task->update([
+    'content' => $request->input('content'),
+    'due_date' => $request->input('due_date'),
+    'priority' => $request->input('priority'),
+    ]);
+    
+    if ($task->wasChanged('due_date')) {
+    event(new TaskDeadlineChanged($task));
+    }
+    
+    $this->updateAssignedTaskUser($task, $request);
+    
+    $this->updateTaskStatus($task, $request);
+    
+    return back();
+    }
     }
 
     /**

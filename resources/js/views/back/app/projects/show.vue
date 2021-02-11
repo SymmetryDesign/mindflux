@@ -2,8 +2,8 @@
     <v-app-default-layout>
         <template v-slot:header>
             <h1 class="text-2xl font-semibold text-gray-900">{{ project.name }}</h1>
-            <div class="flex items-center px-3" >
-                    <a target="_blank"  class="btn btn-indigo">
+            <div class="flex items-center px-3" v-if="project.jamboard_url != null">
+                    <a target="_blank" :href="project.jamboard_url"  class="btn btn-indigo">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
                             <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
                         </svg>
@@ -211,6 +211,7 @@
                     taskUuid: task.uuid,
                     userUuid: task.user.uuid,
                     content: task.content,
+                    jamboard_url: task.jamboard_url,
                     isCompleted: task.is_completed,
                     dueDate: task.due_date,
                     priority: task.priority,

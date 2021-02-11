@@ -9,7 +9,7 @@
                         <div class="mb-6">
                             <div class="form-group">
                                 <label for="project-name" class="form-label">{{ $trans('labels.url') }}</label>
-                                <input id="project-name" class="form-input" :placeholder="$trans('placeholders.project-jamboardURL')" v-model="form.url">
+                                <input id="project-name" class="form-input" :placeholder="$trans('placeholders.project-jamboardURL')" v-model="form.jamboard_url">
                                 <p class="invalid-feedback" v-if="$page.errors.has('project-jamboardURL')">{{ $page.errors.first('project-jamboardURL') }}</p>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
         data() {
             return {
                 form: new Form({
-                    url: '',
+                    jamboard_url: '',
                 })
             }
         },
@@ -88,12 +88,7 @@
                 this.form.processing = true;
 
                 this.$inertia.put(route('app:projects.update', {project: this.$page.project.uuid}), {
-                    name: this.form.name,
-                    description: this.form.description,
-                    timeline: this.form.timeline,
-                    color: this.form.color,
-                    visibility: this.form.visibility,
-                    team_members: this.form.team_members
+                    jamboard_url: this.form.jamboard_url,
                 }).then(() => {
                     this.form.processing = false;
 

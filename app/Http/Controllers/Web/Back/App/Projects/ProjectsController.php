@@ -87,6 +87,7 @@ class ProjectsController extends Controller
             'project' => [
                 'uuid'         => $project->uuid,
                 'name'         => $project->name,
+                'jamboard_url'     => $project->jamboard_url,
                 'description'  => $project->description,
                 'visibility'   => $project->visibility,
                 'timeline'     => $project->timeline,
@@ -172,31 +173,52 @@ class ProjectsController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'name'        => ['required', 'string'],
+        if($request->input('jamboard_url'))
+        {
+            $this->validate($request, [
+            'jamboard_url'=> ['required', 'string']
+        ]);
+
+            $project = Project::where('uuid', $request->project)->firstOrFail();
+            $project->jamboard_url = $request->input('jamboard_url');
+            $project->save();
+
+            session()->flash('message', __('app.messages.project-updated'));
+
+            return back();
+
+        }
+        else
+        {
+            $this->validate($request, [
+            'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'visibility'  => ['required'],
-            'color'       => ['required']
-        ]);
+            'visibility' => ['required'],
+            'color' => ['required']
+            ]);
 
-        $project = Project::where('uuid', $request->project)->firstOrFail();
+            $project = Project::where('uuid', $request->project)->firstOrFail();
 
-        $this->authorize('update', $project);
+            $this->authorize('update', $project);
 
-        $project->update([
-            'name'        => $request->input('name'),
+            $project->update([
+            'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'color'       => $request->input('color'),
-            'visibility'  => $request->input('visibility'),
-        ]);
+            'color' => $request->input('color'),
+            'visibility' => $request->input('visibility'),
+            ]);
 
-        $this->updateProjectTimeline($project, $request);
+            $this->updateProjectTimeline($project, $request);
 
-        $this->syncProjectTeamMembers($project, $request);
+            $this->syncProjectTeamMembers($project, $request);
 
-        session()->flash('message', __('app.messages.project-updated'));
+            session()->flash('message', __('app.messages.project-updated'));
 
-        return back();
+            return back();
+        }
+
+
+
     }
 
     /**

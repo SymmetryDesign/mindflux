@@ -28,7 +28,7 @@
                                 
                                 <!-- clint - link to add jamboard url - opens jamboard url text field modal for this task -->
                                 
-                                <a @click.prevent="$emit('modal-jurl')" href="#"
+                                <a @click.prevent="showTaskAddJUModal()" href="#"
                                        class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                     >
                                         Jamboard URL
@@ -52,11 +52,25 @@
             </div>
             
             <div class="flex items-center px-6 pb-6 pr-6">
-                <button type="button" class="btn btn-sm btn-indigo"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current mr-3">
+                <!-- <button type="button" class="btn btn-sm btn-indigo"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current mr-3">
                     <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
                 </svg>
                 Jamboard
-                </button>
+                </button> -->
+                <div class="flex items-center px-3" v-if="task.jamboard_url != null">
+                    <a target="_blank" :href="task.jamboard_url"  class="btn btn-indigo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        Jamboard URL
+                    </a>
+                </div>
+
+
+
+
+
+
             </div>
 
 
@@ -126,9 +140,6 @@
                 </v-tab>
             </v-tabs>
         </div>
-        <v-modal ref="modal">
-       
-        </v-modal>
     </v-modal>
      
 </template>
@@ -147,6 +158,8 @@
     import VTabComments from '@/views/back/app/tasks/tab-comments'
     import VTabTasks from '@/views/back/app/tasks/tab-tasks'
     import VTabAttachments from '@/views/back/app/tasks/tab-attachments'
+    import VTaskAddJUModal from '@/views/back/app/tasks/modal-task-add-ju'
+
 
     export default {
         components: {
@@ -162,7 +175,8 @@
             VDraggable,
             VTabComments,
             VTabTasks,
-            VTabAttachments
+            VTabAttachments,
+            VTaskAddJUModal
         },
 
         props: {
@@ -179,6 +193,10 @@
                 required: true
             },
             content: {
+                type: String,
+                required: true
+            },
+            jamboard_url: {
                 type: String,
                 required: true
             },
@@ -205,6 +223,7 @@
                 task: new Form({
                     uuid: this.uuid,
                     content: this.content,
+                    jamboard_url: this.jamboard_url,
                     is_completed: this.isCompleted,
                     user_uuid: this.userUuid,
                     due_date: this.dueDate,
@@ -233,6 +252,28 @@
                             modal.hide()
                         });
                 });
+            },
+            showTaskAddJUModal(){
+                  this.$modal(VTaskAddJUModal, {
+                    users: this.users,
+                    projectUuid: this.projectUuid,
+                    taskUuid: this.taskUuid,
+                    userUuid: this.userUuid,
+                    // content: task.content,
+                    // isCompleted: task.is_completed,
+                    // dueDate: task.due_date,
+                    // priority: task.priority,
+                });
+
+                // this.$confirm('Do you want to delete this task permanently?').then((modal) => {
+                //     this.$inertia.delete(route('app:project.tasks.destroy', {
+                //         project: this.projectUuid,
+                //         task: this.taskUuid
+                //     }))
+                //         .then(() => {
+                //             modal.hide()
+                //         });
+                // });
             },
             
             showJamboardLinkModal() {
