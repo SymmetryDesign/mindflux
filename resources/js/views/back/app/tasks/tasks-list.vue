@@ -20,7 +20,7 @@
                                      {{ task.content }}
                                 </a>
                                 
-                                <div class="mt-2 items-center flex md:col-span-2 sm:mt-0" v-if="project.jamboard_url !=null">
+                                
                                             <div class="px-0 sm:px-2">
                                                
                                                 <a target="_blank" :href="project.jamboard_url" class="btn btn-indigo">
@@ -29,7 +29,7 @@
                                                     </svg>
                                                 </a>
                                             </div>
-                                        </div>
+                                        
                              
                             </div>
                             
