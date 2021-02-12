@@ -17,7 +17,7 @@
                                 </div>
 
                                 <a @click.prevent="showTaskModal(task)" href="#" class="text-sm leading-5 truncate hover:underline">
-                                     {{ task.content }}
+                                     {{ task.content }} test
                                 </a>
                              
                             </div>
