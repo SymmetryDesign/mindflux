@@ -30,7 +30,7 @@
                                                 <div class="w-full h-full" :class="['bg-' + task.project.color + '-400']"></div>
                                             </div>
 
-                                            {{ task.project.name }}
+                                            {{ task.project.name }}test
                                         </a>
                                     </div>
 
