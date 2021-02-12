@@ -33,6 +33,18 @@
                                             {{ task.project.name }}
                                         </a>
                                     </div>
+                                    
+                                    
+                                    <div class="flex items-center text-sm leading-5">
+                                        <a :href="route('app:projects.show', {project: task.project.uuid})" class="flex items-center text-sm rounded-lg mb-1 hover:underline">
+                                            <div class="w-3 h-3 overflow-hidden rounded-full mr-2.5 hidden sm:inline-block">
+                                                <div class="w-full h-full" :class="['bg-' + task.project.color + '-400']"></div>
+                                            </div>
+
+                                            {{ task.project.name }}
+                                        </a>
+                                    </div>
+                                    
 
                                     <div class="flex items-center text-sm leading-5 mt-0 sm:mt-2">
                                         <v-dropdown placement="left-0">
