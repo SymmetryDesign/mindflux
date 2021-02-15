@@ -123,7 +123,8 @@
                     isCompleted: task.is_completed,
                     userUuid: task.user_uuid,
                     priority: task.priority,
-                    dueDate: task.due_date
+                    dueDate: task.due_date,
+                    jamboard_url: task.jamboard_url
                 })
             },
 

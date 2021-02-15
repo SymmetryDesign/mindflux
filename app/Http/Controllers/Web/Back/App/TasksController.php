@@ -61,6 +61,7 @@ class TasksController extends Controller
                     'is_completed' => $task->isCompleted(),
                     'user_uuid'    => $task->user->uuid,
                     'priority'     => $task->priority,
+                    'jamboard_url'     => $task->jamboard_url,
                     'project'      => [
                         'uuid'  => $task->column->project->uuid,
                         'name'  => $task->column->project->name,
