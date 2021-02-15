@@ -11,15 +11,40 @@
                 <div class="block">
                     <div class="px-4 py-4 flex items-center sm:px-6">
                         <div class="min-w-0 flex-1 md:grid md:grid-cols-8 sm:flex sm:justify-between sm:items-center">
-                            <div class="flex items-center md:col-span-4">
+                            <div class="flex items-center md:col-span-3">
                                 <div class="pr-2 sm:pr-6">
                                     <input type="checkbox" class="form-checkbox w-6 h-6 rounded-full text-green-400" v-model="task.is_completed" @change="updateTask(task)">
                                 </div>
 
                                 <a @click.prevent="showTaskModal(task)" href="#" class="text-sm leading-5 truncate hover:underline">
-                                    {{ task.content }}
+                                     {{ task.content }}
                                 </a>
+                                
+                          
+                                        
+                             
                             </div>
+                            
+                            <!-- clints edits -->
+                            
+                            <div class="flex items-center md:col-span-1">
+                                <div class="px-0 sm:px-2" v-if="task.jamboard_url !=null">
+                                       <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                                                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+                                                    </svg>
+                                                </a>        
+                                                
+                                </div>
+                                
+                                <div class="px-0 sm:px-2" v-else>
+                                </div>
+                            
+                            </div>
+                            
+                            <!-- end clint -->
+                            
+                           
 
                             <div class="mt-1 sm:mt-0 md:col-span-2">
                                 <div>
@@ -32,6 +57,10 @@
                                             {{ task.project.name }}
                                         </a>
                                     </div>
+                                    
+                                    
+                              
+                                    
 
                                     <div class="flex items-center text-sm leading-5 mt-0 sm:mt-2">
                                         <v-dropdown placement="left-0">
