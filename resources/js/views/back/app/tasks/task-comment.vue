@@ -8,11 +8,90 @@
             <div class="flex items-center justify-between">
                 <div>
                     <span class="text-sm leading-5 font-medium text-indigo-600">{{ user.name }}</span>
+                    
+                
+                   
+                    
                 </div>
 
                 <div>
                     <span class="text-xs text-gray-500">{{ createdAt }}</span>
                 </div>
+
+
+
+
+
+
+               
+
+
+                <div class="pl-3 flex items-center">
+                     <div v-if="!(pinned_comment)">
+                        <a @click.prevent="makePinned(pinned_comment)" class="my-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-pin-fill" viewBox="0 0 16 16">
+                            <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"></path>
+                        </svg></a>
+                    </div>
+                    <a v-else @click.prevent="makeUnPinned(pinned_comment)" class="my-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-fill text-indigo-600" viewBox="0 0 16 16">
+                        <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354z"/>
+                    </svg></a>
+
+
+
+
+
+
+                    <v-dropdown>
+                        <template v-slot:button>
+                            <button class="btn btn-sm btn-flat">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+                                </svg>
+                            </button>
+                        </template>
+
+                        <template v-slot:content>
+                            <div class="dropdown-menu">
+                                
+                                <!-- clint - link to add jamboard url - opens jamboard url text field modal for this task -->
+                                
+                                <a @click.prevent="showTaskAddJUModal()" href="#"
+                                       class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                                    >
+                                        edit
+                                </a>
+                                    
+                                    
+                                <a @click.prevent="showDeleteTaskModal()" href="#" class="dropdown-item">
+                                    {{ $trans('labels.delete') }}
+                                </a>
+                                
+                            </div>
+                        </template>
+                    </v-dropdown>
+
+                
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
             <div class="mt-2">
@@ -46,13 +125,24 @@
 
 <script>
     import VTaskCommentEditor from '@/views/back/app/tasks/task-comment-editor'
+    import VDropdown from '@/components/dropdown'
+
 
     export default {
         components: {
-            VTaskCommentEditor
+            VTaskCommentEditor,
+            VDropdown
         },
 
         props: {
+            task_id: {
+                //type: Integer,
+                required: true
+            },
+            comment_id: {
+                type: String,
+                required: true
+            },
             projectUuid: {
                 type: String,
                 required: true
@@ -73,10 +163,52 @@
                 type: String,
                 required: true
             },
+            pinned_comment: {
+                //type: Boolean,
+                required: true
+            },
             attachments: {
                 type: Array,
                 default: []
             }
+        },
+        methods:{
+            makePinned(val){
+                
+                this.$inertia.post(route('app:project.task.comments.store', {
+                    project: this.projectUuid,
+                    task: this.taskUuid
+                   
+                }), {
+                    comment_uuid: this.comment_id,
+                    task_id: this.task_id,
+                    pinned_comment: true,
+                    //attachments: this.attachments
+                }).then(() => {
+                    this.$emit('onCommentPinned');
+                    this.reset();
+                })
+            },
+            makeUnPinned(val){
+                this.$inertia.post(route('app:project.task.comments.store', {
+                    project: this.projectUuid,
+                    task: this.taskUuid
+                   
+                }), {
+                    comment_uuid: this.comment_id,
+                    task_id: this.task_id,
+                    pinned_comment: false,
+                    //attachments: this.attachments
+                }).then(() => {
+                    this.$emit('onCommentPinned');
+                    this.reset();
+                })
+            }
         }
     }
 </script>
+<style scoped>
+.my-pointer{
+    cursor: pointer;
+}
+</style>

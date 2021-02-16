@@ -18,6 +18,14 @@
                 
             </span>
         </a>
+        <hr v-if="task.pinned_comment !=null">
+        <a href="#" class="text-sm p-4" v-if="task.pinned_comment !=null">
+            <span class="" >
+            
+                {{ task.pinned_comment }}
+                
+            </span>
+        </a>
 
         <div class="flex items-center text-xs justify-between text-gray-500 px-4 pb-4" v-if="task.due_date || task.sub_tasks.total || task.user.name !== null">
             <div class="flex items-center -mx-3">

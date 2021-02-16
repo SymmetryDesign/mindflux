@@ -14,12 +14,16 @@
             <div v-else>
                 <v-task-comment
                     :key="comment.uuid"
+                    :comment_id="comment.uuid"
                     :user="comment.user"
                     :content="comment.content"
+                    :pinned_comment="comment.pinned_comment"
+                    :task_id="comment.task_id"
                     :attachments="comment.attachments"
                     :created-at="comment.created_at"
                     :project-uuid="projectUuid"
                     :task-uuid="taskUuid"
+                    @onCommentPinned="onCommentPinned"
                     v-for="comment in comments"
                 />
             </div>
@@ -66,6 +70,10 @@
             onCommentSubmitted() {
                 this.getComments();
                 this.$emit('new-comment')
+            },
+            onCommentPinned() {
+                this.getComments();
+                //this.$emit('new-comment')
             },
 
             getComments() {

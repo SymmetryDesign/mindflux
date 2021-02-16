@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Back\App\Projects;
 
 use App\Events\Project\ProjectAssignedToUser;
+use App\Http\Controllers\Web\Back\App\Projects\TaskCommentsController;
 use App\Events\Project\ProjectTimelineChanged;
 use App\Filters\ProjectFilter;
 use App\Http\Controllers\Controller;
@@ -111,6 +112,7 @@ class ProjectsController extends Controller
                                 'due_date'     => optional($task->due_date)->format('Y-m-d'),
                                 'priority'     => $task->priority,
                                 'jamboard_url'     => $task->jamboard_url,
+                                'pinned_comment' => $this->getPinnedComment($task->id),
                                 'is_completed' => $task->isCompleted(),
                                 'user'         => [
                                     'uuid'       => optional($task->user)->uuid,
@@ -326,5 +328,12 @@ class ProjectsController extends Controller
         if ($project->wasChanged('start_date') || $project->wasChanged('end_date')) {
             event(new ProjectTimelineChanged($project));
         }
+    }
+    // getting task comment
+    private function getPinnedComment($task_id)
+    {
+        $task_comment = new TaskCommentsController;
+
+        return $task_comment->getTaskPinnedComment($task_id);
     }
 }

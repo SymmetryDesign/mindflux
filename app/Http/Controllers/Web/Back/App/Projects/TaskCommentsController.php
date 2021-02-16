@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Back\App\Projects;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Plank\Mediable\Media;
 
@@ -37,6 +38,8 @@ class TaskCommentsController extends Controller
             return [
                 'uuid'        => $comment->uuid,
                 'content'     => $comment->content,
+                'pinned_comment'     => $comment->is_pinned,
+                'task_id'     => $comment->task_id,
                 'created_at'  => $comment->created_at->diffForHumans(),
                 'attachments' => $comment->getMedia('attachments')->transform(function ($attachment) {
                     return [
@@ -64,25 +67,48 @@ class TaskCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        $task = Task::where('uuid', $request->task)->firstOrFail();
+        if($request->input('pinned_comment') AND $request->input('comment_uuid') AND $request->input('task_id'))
+        {
+            Comment::where('task_id',$request->input('task_id'))->update(['is_pinned' => 0]);
 
-        $this->authorize('view', $task->column->project);
+            $comment = Comment::where('uuid', $request->comment_uuid)->firstOrFail();
 
-        $this->validate($request, [
-            'content' => 'required',
-        ]);
+            $comment->is_pinned = $request->input('pinned_comment');
+            $comment->save();
 
-        $comment = $task->comments()->create([
-            'content' => $request->input('content'),
-            'user_id' => auth()->user()->id,
-        ]);
+            session()->flash('message','Comment Updated');
 
-        if (count($request->input('attachments'))) {
-            Media::whereIn('uuid', $request->input('attachments'))->each(function ($attachment) use ($comment) {
-                $comment->attachMedia($attachment, 'attachments');
-            });
+            return back();
+
         }
+        else
+        {
 
-        return back();
+            $task = Task::where('uuid', $request->task)->firstOrFail();
+
+            $this->authorize('view', $task->column->project);
+
+            $this->validate($request, [
+                'content' => 'required',
+            ]);
+
+            $comment = $task->comments()->create([
+                'content' => $request->input('content'),
+                'user_id' => auth()->user()->id,
+            ]);
+
+            if (count($request->input('attachments'))) {
+                Media::whereIn('uuid', $request->input('attachments'))->each(function ($attachment) use ($comment) {
+                    $comment->attachMedia($attachment, 'attachments');
+                });
+            }
+
+            return back();
+        }
+    }
+    // called from projectscontroller
+    public function getTaskPinnedComment($task_id)
+    {
+        return Comment::where('is_pinned',true)->where('task_id',$task_id)->pluck('content')->first();
     }
 }

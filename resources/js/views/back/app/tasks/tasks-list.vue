@@ -25,6 +25,7 @@
                              
                             </div>
                             
+                            
                             <!-- clints edits -->
                             
                             <div class="flex items-center md:col-span-1">
@@ -57,6 +58,7 @@
                                             {{ task.project.name }}
                                         </a>
                                     </div>
+                                    
                                     
                                     
                               
