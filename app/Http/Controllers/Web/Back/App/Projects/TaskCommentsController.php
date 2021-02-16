@@ -67,7 +67,8 @@ class TaskCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->input('pinned_comment') AND $request->input('comment_uuid') AND $request->input('task_id'))
+       
+        if($request->has('pinned_comment') AND $request->input('comment_uuid') AND $request->input('task_id'))
         {
             Comment::where('task_id',$request->input('task_id'))->update(['is_pinned' => 0]);
 
@@ -80,6 +81,17 @@ class TaskCommentsController extends Controller
 
             return back();
 
+        }
+        elseif($request->input('comment_uuid') AND $request->input('content'))
+        {
+            $comment = Comment::where('uuid', $request->comment_uuid)->firstOrFail();
+
+            $comment->content = $request->input('content');
+            $comment->save();
+
+            session()->flash('message','Comment Updated');
+
+            return back();
         }
         else
         {
@@ -105,6 +117,23 @@ class TaskCommentsController extends Controller
 
             return back();
         }
+    }
+    /**
+     * Delete the specified task.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(Request $request)
+    {
+        $comment = Comment::where('uuid', $request->comment_uuid)->firstOrFail();
+
+        // $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return back();
     }
     // called from projectscontroller
     public function getTaskPinnedComment($task_id)

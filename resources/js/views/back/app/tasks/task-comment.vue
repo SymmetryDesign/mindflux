@@ -55,14 +55,14 @@
                                 
                                 <!-- clint - link to add jamboard url - opens jamboard url text field modal for this task -->
                                 
-                                <a @click.prevent="showTaskAddJUModal()" href="#"
+                                <a @click.prevent="showTaskCommentEditModal()" href="#"
                                        class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                     >
                                         edit
                                 </a>
                                     
                                     
-                                <a @click.prevent="showDeleteTaskModal()" href="#" class="dropdown-item">
+                                <a @click.prevent="showDeleteCommentModal()" href="#" class="dropdown-item">
                                     {{ $trans('labels.delete') }}
                                 </a>
                                 
@@ -72,24 +72,6 @@
 
                 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             </div>
@@ -120,18 +102,82 @@
                 </li>
             </ul>
         </div>
+        <!-- Edit Comment modal -->
+        <v-modal ref="modal" id="modal_edit_comment">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+            
+
+                <v-tabs>
+                    <v-tab :name="$trans('headings.edit-comment')" active>
+                        <div class="flex flex-col px-6 pt-6 pb-6">
+                            <div class="mb-6">
+                                <div class="form-group">
+                                    <label for="project-name" class="form-label">{{ $trans('labels.edit-comment') }}</label>
+
+                                    <div class="flex flex-col rounded-lg shadow-sm border border-gray-300">
+                                        <v-textarea-exapandable
+                                            class="border-none shadow-none focus:outline-none focus:shadow-none rounded-lg"
+                                            :placeholder="$trans('placeholders.write-something')"
+                                            v-model="comment_content"
+                                        
+                                        
+                                        />
+
+                                        <div class="mt-2 px-3 pb-3 flex items-center justify-between">
+                                            <div>
+                                                <button type="button" class="btn btn-sm btn-indigo" @click="submit()">
+                                                    <svg class="w-3 h-3 mr-1.5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                        <path d="M0 0l20 10L0 20V0zm0 8v4l10-2L0 8z"/>
+                                                    </svg>
+                                                    {{ $trans('labels.send') }}
+                                                </button>
+                                            </div>
+
+                                            <div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+        
+                        </div>
+                    </v-tab>
+
+                
+                </v-tabs>
+
+                <div class="bg-gray-50 p-4 sm:px-6 sm:py-4 sm:flex sm:flex-row-reverse">
+
+                    <button type="button" class="btn btn-flat mr-3" @click="hide()">
+                        {{ $trans('labels.cancel') }}
+                    </button>
+                </div>
+            </div>
+        </v-modal>
     </div>
+    
 </template>
 
 <script>
     import VTaskCommentEditor from '@/views/back/app/tasks/task-comment-editor'
     import VDropdown from '@/components/dropdown'
+    import VModal from '@/components/modal'
+    import {Tab as VTab, Tabs as VTabs} from '@/components/tabs'
+    import VTextareaExapandable from '@/components/textarea-expandable'
+   
+
 
 
     export default {
         components: {
             VTaskCommentEditor,
-            VDropdown
+            VTextareaExapandable,
+            VDropdown,
+            VModal,
+            VTabs,
+            VTab,
         },
 
         props: {
@@ -172,7 +218,30 @@
                 default: []
             }
         },
+        data() {
+            return {
+                comment_content: this.content
+                
+            }
+        },
         methods:{
+            showDeleteCommentModal() {
+                this.$confirm('Do you want to delete this comment permanently?').then((modal) => {
+                    this.$inertia.delete(route('app:project.comments.destroy', {
+                        project: this.projectUuid,
+                        task: this.taskUuid,
+                        comment_uuid: this.comment_id,
+                    }))
+                        .then(() => {
+                            modal.hide();
+                            this.$emit('onCommentPinned');
+                        });
+                });
+            },
+            showTaskCommentEditModal(){
+                this.$refs.modal.show();
+
+            },
             makePinned(val){
                 
                 this.$inertia.post(route('app:project.task.comments.store', {
@@ -203,7 +272,26 @@
                     this.$emit('onCommentPinned');
                     this.reset();
                 })
-            }
+            },
+            submit() {
+                //alert(this.projectUuid);
+               this.$inertia.post(route('app:project.task.comments.store', {
+                    project: this.projectUuid,
+                    task: this.taskUuid
+                }), {
+                     'content': this.comment_content,
+                     'comment_uuid': this.comment_id,
+                   
+                }).then(() => {
+                   
+                        this.$refs.modal.hide();
+                        this.$emit('onCommentPinned');
+                    
+                });
+            },
+             hide() {
+                this.$refs.modal.hide();
+            },
         }
     }
 </script>

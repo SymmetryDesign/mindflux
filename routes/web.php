@@ -233,7 +233,7 @@ Route::group(['namespace' => 'Web\Back\App', 'prefix' => 'app', 'as' => 'app:'],
      */
     Route::get('projects/{project}/tasks/{task}/comments', 'Projects\TaskCommentsController@index')->name('project.task.comments.index');
     Route::post('projects/{project}/tasks/{task}/comments', 'Projects\TaskCommentsController@store')->name('project.task.comments.store');
-
+    Route::delete('comments', 'Projects\TaskCommentsController@destroy')->name('project.comments.destroy');
     /**
      * Sub Tasks
      */
