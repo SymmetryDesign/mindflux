@@ -19,7 +19,7 @@
             </span>
         </a>
         <hr v-if="task.pinned_comment !=null">
-        <a href="#" class="text-sm p-4" v-if="task.pinned_comment !=null">
+        <a href="#" class="text-sm p-4" v-if="task.pinned_comment !=null" @click.prevent="$emit('click', task)">
            
             <p class="leading-5 text-gray-900 pre-formatted">{{ task.pinned_comment }}</p>
         </a>

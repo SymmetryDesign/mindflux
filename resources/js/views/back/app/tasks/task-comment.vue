@@ -13,6 +13,15 @@
                    
                     
                 </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
 
                 <div>
                     <span class="text-xs text-gray-500">{{ createdAt }}</span>
