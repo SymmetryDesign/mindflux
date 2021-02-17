@@ -304,11 +304,11 @@
         }
     }
 </script>
-<style scoped>
+<style>
 .my-pointer{
     cursor: pointer;
 }
 .pre-formatted {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 </style>
