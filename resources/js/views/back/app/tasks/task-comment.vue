@@ -77,7 +77,7 @@
             </div>
 
             <div class="mt-2">
-                <p class="leading-5 text-gray-900">{{ content }}</p>
+                <p class="leading-5 text-gray-900 pre-formatted">{{ content }}</p>
             </div>
 
             <ul class="border border-gray-200 rounded-md mt-4" v-if="attachments.length > 0">
@@ -298,5 +298,8 @@
 <style scoped>
 .my-pointer{
     cursor: pointer;
+}
+.pre-formatted {
+  white-space: pre;
 }
 </style>
