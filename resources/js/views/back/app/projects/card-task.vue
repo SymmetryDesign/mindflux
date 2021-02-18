@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="flex items-center px-3" v-if="task.sub_tasks.total > 0">
-                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current mr-1.5">
+                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current mr-1.5 ">
                         <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM6.7 9.29L9 11.6l4.3-4.3 1.4 1.42L9 14.4l-3.7-3.7 1.4-1.42z"></path>
                     </svg>
 
@@ -56,7 +56,7 @@
               <!-- Waqar Code -->
                 <div class="jam flex items-center px-3" v-if="task.jamboard_url">
                     <a target="_blank" :href="task.jamboard_url" class="btn btn-indigo">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current jam">
                             <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
                         </svg>
                     </a>
@@ -99,6 +99,12 @@
 <style scoped>
 .pre-formatted {
   white-space: pre-wrap;
+}
+.card-title {
+  font-weight:600;
+}
+.jam {
+    transform: scale(.8);
 }
 </style>
 
