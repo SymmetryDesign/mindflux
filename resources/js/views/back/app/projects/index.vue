@@ -242,7 +242,7 @@
         }
     }
 </script>
-<style scoped>
+<style>
 .jam-btn {
   padding-left:.6rem;
   padding-right:.6rem;
