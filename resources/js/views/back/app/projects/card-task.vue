@@ -103,7 +103,7 @@
 .card-title {
   font-weight:600;
 }
-.jam {
+.text-xs .jam {
     transform: scale(.8);
 }
 .jam-btn {
